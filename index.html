@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>North River Tugboat Museum</title>
+<meta name="description" content="The North River Tugboat Museum preserves working tugboats and the stories of the crews who ran them, including the raising and restoration of sunken vessels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --hull: #1c2226;
+    --hull-soft: #2b3338;
+    --river: #dfe6e4;
+    --river-deep: #c6d2cf;
+    --signal: #b8352b;
+    --brass: #a8873a;
+    --paper: #f7f9f8;
+    --ink: #1c2226;
+    --muted: #4c5a60;
+    --display: "Zilla Slab", Georgia, serif;
+    --body: "Source Sans 3", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--river);
+    color: var(--ink);
+    font: 1.0625rem/1.6 var(--body);
+  }
+  a { color: var(--signal); }
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--brass);
+    outline-offset: 3px;
+  }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; }
+
+  .bar { background: var(--hull); color: var(--paper); }
+  .bar .wrap {
+    display: flex; flex-wrap: wrap; gap: .5rem 1.5rem;
+    align-items: center; justify-content: space-between;
+    padding-top: .9rem; padding-bottom: .9rem;
+  }
+  .bar strong { font-family: var(--display); font-weight: 700; font-size: 1.1rem; }
+  .bar nav { display: flex; gap: 1.25rem; }
+  .bar nav a { color: var(--paper); text-decoration: none; font-weight: 600; }
+  .bar nav a:hover { color: #f3c6a0; }
+
+  /* Hero painted like a tug's hull, red boot-top stripe at the waterline */
+  .hull {
+    background: var(--hull);
+    color: var(--paper);
+    padding: 4.5rem 0 3.5rem;
+    position: relative;
+  }
+  .hull::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -14px;
+    height: 14px; background: var(--signal);
+    box-shadow: 0 6px 0 var(--river-deep);
+  }
+  .hull h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 8vw, 5.6rem);
+    line-height: .95;
+    letter-spacing: .02em;
+    margin: 0 0 1.5rem;
+    color: #fbfbf7;
+  }
+  .hull h1 span { display: block; }
+  .hull h1 .port {
+    font-size: .38em; letter-spacing: .06em; color: #d9c48f; margin-top: .9rem;
+  }
+  .hull p { max-width: 36rem; margin: 0; font-size: 1.2rem; color: #d7dedc; }
+
+  section { padding: 4.5rem 0 1rem; }
+  h2 {
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    line-height: 1.1; margin: 0 0 1rem;
+  }
+  .lede { max-width: 40rem; color: var(--muted); margin: 0 0 2rem; }
+
+  .about-grid {
+    display: grid; gap: 2rem 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+  .about-grid h3 {
+    font-family: var(--display); font-weight: 500; font-size: 1.3rem; margin: 0 0 .4rem;
+    padding-top: .75rem; border-top: 3px solid var(--hull);
+  }
+  .about-grid p { margin: 0; color: var(--muted); max-width: 32rem; }
+
+  .gallery {
+    display: grid; gap: .75rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    grid-auto-flow: dense;
+  }
+  .gallery button {
+    all: unset; cursor: zoom-in; display: block; position: relative;
+    background: var(--hull-soft); aspect-ratio: 4 / 3; overflow: hidden;
+  }
+  .gallery button.wide { grid-column: span 2; aspect-ratio: 8 / 3; }
+  @media (max-width: 34rem) { .gallery button.wide { grid-column: auto; aspect-ratio: 4 / 3; } }
+  .gallery figure { margin: 0; height: 100%; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 1.6rem .8rem .6rem;
+    background: linear-gradient(transparent, rgba(20,24,27,.85));
+    color: #fff; font-size: .95rem; line-height: 1.3;
+  }
+  .gallery button:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+
+  dialog {
+    border: 0; padding: 0; background: transparent; max-width: min(92vw, 70rem);
+    color: var(--paper);
+  }
+  dialog::backdrop { background: rgba(14,17,19,.92); }
+  dialog img { max-width: 100%; max-height: 78vh; display: block; margin: 0 auto; }
+  dialog p { text-align: center; margin: .8rem 0 0; }
+  .lb-controls { display: flex; justify-content: center; gap: .75rem; margin-top: 1rem; }
+  .lb-controls button {
+    font: 600 1rem var(--body); color: var(--paper); background: var(--hull-soft);
+    border: 1px solid #5d6a70; padding: .5rem 1.1rem; cursor: pointer;
+  }
+  .lb-controls button:hover { background: var(--signal); border-color: var(--signal); }
+
+  .visit {
+    background: var(--paper);
+    border-left: 6px solid var(--signal);
+    padding: 1.75rem 1.75rem 1.5rem;
+    max-width: 44rem;
+  }
+  .visit p { margin: 0 0 .75rem; }
+
+  footer {
+    margin-top: 5rem; background: var(--hull); color: #b9c3c0;
+    padding: 2rem 0; font-size: .95rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <strong>North River Tugboat Museum</strong>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hull">
+  <div class="wrap">
+    <h1>
+      <span>North River</span>
+      <span>Tugboat Museum</span>
+      <span class="port">Working boats, saved and restored</span>
+    </h1>
+    <p>We raise, restore and keep the tugboats and barges that worked the river, so the people who see them can understand how they were built and how they were run.</p>
+  </div>
+</div>
+
+<main>
+  <section id="about">
+    <div class="wrap">
+      <h2>What we do</h2>
+      <p class="lede">These boats are worth more afloat and explained than rusting on the bottom.</p>
+      <div class="about-grid">
+        <div>
+          <h3>Raising sunken vessels</h3>
+          <p>Some of our boats came to us from the bottom of the river. Bringing them up is slow, careful work, documented from first survey to final lift.</p>
+        </div>
+        <div>
+          <h3>Restoration</h3>
+          <p>Once a hull is up, the long work begins: cleaning, repairing, and putting back the details that make each boat what it was, including Pennsylvania Railroad Barge No. 399.</p>
+        </div>
+        <div>
+          <h3>Sharing the story</h3>
+          <p>We record each restoration in photographs and video, so anyone can follow a boat's journey from wreck to working vessel again.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap">
+      <h2>Gallery</h2>
+      <p class="lede">Select any photo to see it larger. Use the arrow keys to move between photos.</p>
+      <div class="gallery" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="visit">
+        <p>Visiting details, location and contact information will be posted here soon.</p>
+        <p>Check back for new photos and videos as each restoration moves forward.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="year">2026</span> North River Tugboat Museum</div>
+</footer>
+
+<dialog id="lightbox" aria-label="Photo viewer">
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+  <div class="lb-controls">
+    <button type="button" id="lb-prev">Previous</button>
+    <button type="button" id="lb-close">Close</button>
+    <button type="button" id="lb-next">Next</button>
+  </div>
+</dialog>
+
+<script>
+/*
+  GALLERY PHOTOS
+  To add a photo: put the image in the "images" folder, then edit a line below, e.g.
+    { src: "images/barge-399.jpg", caption: "What the photo shows", wide: false },
+  wide: true makes a panoramic photo span two columns.
+  Entries with no src show a placeholder tile.
+*/
+const photos = [
+  { src: "", caption: "Barge No. 399 before the raising", wide: true },
+  { src: "", caption: "Survey dive on the wreck site" },
+  { src: "", caption: "Lift bags in position" },
+  { src: "", caption: "Breaking the surface" },
+  { src: "", caption: "Hull cleaning after recovery", wide: true },
+  { src: "", caption: "Restoring the pilothouse" },
+  { src: "", caption: "Engine room details" },
+  { src: "", caption: "Back on the water" },
+];
+
+function placeholder() {
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">' +
+    '<rect width="400" height="300" fill="#2b3338"/>' +
+    '<rect y="214" width="400" height="86" fill="#3d4b52"/>' +
+    '<path d="M70 214 L95 178 H300 L330 214 Z" fill="#1c2226"/>' +
+    '<rect x="70" y="208" width="260" height="8" fill="#b8352b"/>' +
+    '<rect x="150" y="140" width="80" height="38" fill="#e8ece9"/>' +
+    '<rect x="160" y="148" width="18" height="12" fill="#2b3338"/>' +
+    '<rect x="186" y="148" width="18" height="12" fill="#2b3338"/>' +
+    '<rect x="240" y="118" width="22" height="60" fill="#1c2226"/>' +
+    '<rect x="240" y="126" width="22" height="8" fill="#b8352b"/>' +
+    '<text x="200" y="262" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#c6d2cf">Photo coming soon</text>' +
+    '</svg>';
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
+const grid = document.getElementById("gallery-grid");
+photos.forEach((p, i) => {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  if (p.wide) btn.className = "wide";
+  btn.setAttribute("aria-label", "View larger: " + p.caption);
+  const fig = document.createElement("figure");
+  const img = document.createElement("img");
+  img.src = p.src || placeholder();
+  img.alt = p.caption;
+  img.loading = "lazy";
+  const cap = document.createElement("figcaption");
+  cap.textContent = p.caption;
+  fig.append(img, cap);
+  btn.append(fig);
+  btn.addEventListener("click", () => openLightbox(i));
+  grid.append(btn);
+});
+
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lb-img");
+const lbCap = document.getElementById("lb-cap");
+let current = 0;
+
+function show(i) {
+  current = (i + photos.length) % photos.length;
+  const p = photos[current];
+  lbImg.src = p.src || placeholder();
+  lbImg.alt = p.caption;
+  lbCap.textContent = p.caption;
+}
+function openLightbox(i) { show(i); lb.showModal(); }
+
+document.getElementById("lb-prev").onclick = () => show(current - 1);
+document.getElementById("lb-next").onclick = () => show(current + 1);
+document.getElementById("lb-close").onclick = () => lb.close();
+lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+lb.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") show(current - 1);
+  if (e.key === "ArrowRight") show(current + 1);
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
