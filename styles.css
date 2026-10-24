@@ -102,6 +102,7 @@ h2 {
 .to-gallery:hover { background: var(--signal); }
 
 /* Video */
+.videos { display: grid; gap: 3.5rem; }
 .video {
   margin: 0;
   max-width: 56rem;
