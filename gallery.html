@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery · North River Tugboat Museum</title>
+<meta name="description" content="Video and photos from the North River Tugboat Museum, including the raising of Pennsylvania Railroad Barge No. 399.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="home" href="./">North River Tugboat Museum</a>
+    <nav aria-label="Main">
+      <a href="./#about">About</a>
+      <a href="gallery.html" aria-current="page">Gallery</a>
+      <a href="./#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hull short">
+  <div class="wrap">
+    <h1>Gallery</h1>
+    <p>Video and photographs from our raisings and restorations.</p>
+  </div>
+</div>
+
+<main>
+  <section id="video">
+    <div class="wrap">
+      <h2>Video</h2>
+      <!--
+        To add another video: copy the whole <figure> block below,
+        change the ID after /embed/ and the caption text.
+      -->
+      <figure class="video">
+        <div class="frame">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/xeMvElxNL10?rel=0"
+            title="399 Initial Raising"
+            loading="lazy"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+        <figcaption>399 Initial Raising</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="photos">
+    <div class="wrap">
+      <h2>Photos</h2>
+      <p class="lede">Select any photo to see it larger. Use the arrow keys to move between photos.</p>
+      <div class="gallery" id="gallery-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="year">2026</span> North River Tugboat Museum</div>
+</footer>
+
+<dialog id="lightbox" aria-label="Photo viewer">
+  <img id="lb-img" alt="">
+  <p id="lb-cap"></p>
+  <div class="lb-controls">
+    <button type="button" id="lb-prev">Previous</button>
+    <button type="button" id="lb-close">Close</button>
+    <button type="button" id="lb-next">Next</button>
+  </div>
+</dialog>
+
+<script>
+/*
+  GALLERY PHOTOS
+  To add a photo: put the image in the "images" folder, then edit a line below, e.g.
+    { src: "images/barge-399.jpg", caption: "What the photo shows", wide: false },
+  wide: true makes a panoramic photo span two columns.
+  Entries with no src show a placeholder tile.
+*/
+const photos = [
+  { src: "", caption: "Barge No. 399 before the raising", wide: true },
+  { src: "", caption: "Survey dive on the wreck site" },
+  { src: "", caption: "Lift bags in position" },
+  { src: "", caption: "Breaking the surface" },
+  { src: "", caption: "Hull cleaning after recovery", wide: true },
+  { src: "", caption: "Restoring the pilothouse" },
+  { src: "", caption: "Engine room details" },
+  { src: "", caption: "Back on the water" },
+];
+
+function placeholder() {
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">' +
+    '<rect width="400" height="300" fill="#2b3338"/>' +
+    '<rect y="214" width="400" height="86" fill="#3d4b52"/>' +
+    '<path d="M70 214 L95 178 H300 L330 214 Z" fill="#1c2226"/>' +
+    '<rect x="70" y="208" width="260" height="8" fill="#b8352b"/>' +
+    '<rect x="150" y="140" width="80" height="38" fill="#e8ece9"/>' +
+    '<rect x="160" y="148" width="18" height="12" fill="#2b3338"/>' +
+    '<rect x="186" y="148" width="18" height="12" fill="#2b3338"/>' +
+    '<rect x="240" y="118" width="22" height="60" fill="#1c2226"/>' +
+    '<rect x="240" y="126" width="22" height="8" fill="#b8352b"/>' +
+    '<text x="200" y="92" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#c6d2cf">Photo coming soon</text>' +
+    '</svg>';
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
+const grid = document.getElementById("gallery-grid");
+photos.forEach((p, i) => {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  if (p.wide) btn.className = "wide";
+  btn.setAttribute("aria-label", "View larger: " + p.caption);
+  const fig = document.createElement("figure");
+  const img = document.createElement("img");
+  img.src = p.src || placeholder();
+  img.alt = p.caption;
+  img.loading = "lazy";
+  const cap = document.createElement("figcaption");
+  cap.textContent = p.caption;
+  fig.append(img, cap);
+  btn.append(fig);
+  btn.addEventListener("click", () => openLightbox(i));
+  grid.append(btn);
+});
+
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lb-img");
+const lbCap = document.getElementById("lb-cap");
+let current = 0;
+
+function show(i) {
+  current = (i + photos.length) % photos.length;
+  const p = photos[current];
+  lbImg.src = p.src || placeholder();
+  lbImg.alt = p.caption;
+  lbCap.textContent = p.caption;
+}
+function openLightbox(i) { show(i); lb.showModal(); }
+
+document.getElementById("lb-prev").onclick = () => show(current - 1);
+document.getElementById("lb-next").onclick = () => show(current + 1);
+document.getElementById("lb-close").onclick = () => lb.close();
+lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+lb.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") show(current - 1);
+  if (e.key === "ArrowRight") show(current + 1);
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
