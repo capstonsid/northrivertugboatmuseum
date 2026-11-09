@@ -3,75 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>North River Tugboat Museum</title>
-<meta name="description" content="The North River Tugboat Museum preserves working tugboats and the stories of the crews who ran them, including the raising and restoration of sunken vessels.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<title>North River Tugboat Museum: Coming Soon</title>
+<meta name="description" content="The North River Tugboat Museum website is coming soon.">
+<style>
+  :root { --bg:#0f2a3d; --fg:#f4efe6; --accent:#d9a441; --muted:#a9bccb; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; }
+  body {
+    background: radial-gradient(ellipse at top, #1d4560 0%, var(--bg) 65%);
+    color: var(--fg);
+    font-family: Georgia, "Times New Roman", serif;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px 16px;
+  }
+  main { max-width:640px; }
+  svg { width:120px; height:auto; margin-bottom:24px; }
+  .kicker { letter-spacing:.25em; text-transform:uppercase; font-size:.8rem; color:var(--accent); margin:0 0 12px; font-family: Arial, Helvetica, sans-serif; }
+  h1 { font-size:clamp(2rem, 6vw, 3.2rem); line-height:1.1; margin:0 0 20px; font-weight:normal; }
+  p { font-size:1.15rem; line-height:1.6; color:var(--muted); margin:0 auto; }
+  .rule { width:60px; height:2px; background:var(--accent); margin:28px auto; border:0; }
+  footer { font-size:.9rem; color:var(--muted); font-family: Arial, Helvetica, sans-serif; }
+</style>
 </head>
 <body>
-
-<header class="bar">
-  <div class="wrap">
-    <a class="home" href="./">North River Tugboat Museum</a>
-    <nav aria-label="Main">
-      <a href="#about">About</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<div class="hull">
-  <div class="wrap">
-    <h1>
-      <span>North River</span>
-      <span>Tugboat Museum</span>
-      <span class="port">Working boats, saved and restored</span>
-    </h1>
-    <p>We raise, restore and keep the tugboats and barges that worked the river, so the people who see them can understand how they were built and how they were run.</p>
-  </div>
-</div>
-
 <main>
-  <section id="about">
-    <div class="wrap">
-      <h2>What we do</h2>
-      <p class="lede">These boats are worth more afloat and explained than rusting on the bottom.</p>
-      <div class="about-grid">
-        <div>
-          <h3>Raising sunken vessels</h3>
-          <p>Some of our boats came to us from the bottom of the river. Bringing them up is slow, careful work, documented from first survey to final lift.</p>
-        </div>
-        <div>
-          <h3>Restoration</h3>
-          <p>Once a hull is up, the long work begins: cleaning, repairing, and putting back the details that make each boat what it was, including Pennsylvania Railroad Barge No. 399.</p>
-        </div>
-        <div>
-          <h3>Sharing the story</h3>
-          <p>We record each restoration in photographs and video, so anyone can follow a boat's journey from wreck to working vessel again.</p>
-        </div>
-      </div>
-      <a class="to-gallery" href="gallery.html">Watch the videos</a>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="wrap">
-      <h2>Contact</h2>
-      <div class="visit">
-        <p>Visiting details, location and contact information will be posted here soon.</p>
-        <p>Check back for new photos and videos as each restoration moves forward.</p>
-      </div>
-    </div>
-  </section>
+  <svg viewBox="0 0 120 70" aria-hidden="true" fill="none" stroke="#d9a441" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 46 h104 l-10 14 H20 z"/>
+    <path d="M34 46 V30 h38 v16"/>
+    <path d="M44 30 V20 h18 v10"/>
+    <path d="M78 46 V24 h8 v22"/>
+    <path d="M4 66 q8 -4 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0"/>
+  </svg>
+  <p class="kicker">North River Tugboat Museum</p>
+  <h1>Our new website is coming soon</h1>
+  <p>We're restoring this site the same way we restore our boats: carefully, one piece at a time. Check back soon.</p>
+  <hr class="rule">
+  <footer>&copy; North River Tugboat Museum</footer>
 </main>
-
-<footer>
-  <div class="wrap">&copy; <span id="year">2026</span> North River Tugboat Museum</div>
-</footer>
-
-<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
