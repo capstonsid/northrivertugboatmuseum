@@ -172,3 +172,46 @@ footer {
   margin-top: 5rem; background: var(--hull); color: #b9c3c0;
   padding: 2rem 0; font-size: .95rem;
 }
+
+/* Vessel pages */
+.specs {
+  display: grid; gap: 0; margin: 0; max-width: 44rem;
+  background: var(--paper); border-left: 6px solid var(--signal);
+}
+.specs div {
+  display: grid; grid-template-columns: 8rem 1fr; gap: 1rem;
+  padding: .7rem 1.25rem; border-bottom: 1px solid var(--river-deep);
+}
+.specs div:last-child { border-bottom: 0; }
+.specs dt { font-weight: 600; color: var(--muted); }
+.specs dd { margin: 0; }
+@media (max-width: 30rem) { .specs div { grid-template-columns: 1fr; gap: 0; } }
+.placeholder { color: var(--muted); font-style: italic; margin: 0; }
+.videos:not(:empty) + .placeholder, .gallery:not(:empty) + .placeholder { display: none; }
+.back { padding-top: 3rem; padding-bottom: 0; }
+.back a { font-weight: 600; }
+
+.vessel-list {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+}
+.vessel-card {
+  display: flex; flex-direction: column; gap: .2rem;
+  background: var(--paper); color: var(--ink); text-decoration: none;
+  padding: 1.25rem 1.4rem; border-bottom: 4px solid var(--hull);
+}
+.vessel-card:hover { border-bottom-color: var(--signal); }
+.vessel-card .year { font: 600 .85rem var(--body); letter-spacing: .12em; color: var(--signal); }
+.vessel-card .name { font: 700 1.4rem/1.15 var(--display); }
+.vessel-card .meta { color: var(--muted); font-size: .95rem; }
+.vessel-card .thumb {
+  display: block; aspect-ratio: 3 / 2; margin: -1.25rem -1.4rem .9rem;
+  background: var(--hull-soft); overflow: hidden; position: relative;
+}
+.vessel-card .thumb:empty::after, .vessel-card .thumb:not(:has(img))::after {
+  content: "Photo coming soon"; position: absolute; inset: 0;
+  display: grid; place-items: center; color: #9aa6aa; font-size: .9rem; letter-spacing: .06em;
+}
+.vessel-card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+.vessel-card:hover .thumb img { transform: scale(1.03); }
+@media (prefers-reduced-motion: reduce) { .vessel-card .thumb img { transition: none; } }
