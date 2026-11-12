@@ -43,6 +43,10 @@ a:focus-visible, button:focus-visible {
 .bar nav a:hover { color: #f3c6a0; }
 .bar nav a[aria-current="page"] { color: #d9c48f; }
 
+/* Front page title graphic */
+.title-art { background: #fff; padding: 1.5rem 1.25rem; }
+.title-art img { display: block; width: 100%; max-width: 50rem; height: auto; margin: 0 auto; }
+
 /* Hero painted like a tug's hull, red boot-top stripe at the waterline */
 .hull {
   background: var(--hull);
